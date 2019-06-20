@@ -22,11 +22,10 @@ def amplitudeSelectiveFiltering(C_rgb, amax = 0.002, delta = 0.0001):
     
     #line 4
     W[np.abs(F[0,:]<amax)] = 1
-    
     W = W.reshape([1,L])
-    test = np.tile(W,[3,1])
+
     #line 5
-    Ff = np.multiply(F,(test))
+    Ff = np.multiply(F,(np.tile(W,[3,1])))
     
     #line 6
     C = np.transpose(np.array([(np.mean(C_rgb,1)),]*(L))) * np.abs(np.fft.ifft(Ff)+1)
